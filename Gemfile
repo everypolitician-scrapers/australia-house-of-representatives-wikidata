@@ -10,5 +10,8 @@ gem "colorize"
 gem "nokogiri"
 gem "open-uri-cached"
 gem "pry"
+gem "rest-client"
 gem "scraperwiki", git: "https://github.com/openaustralia/scraperwiki-ruby.git", branch: "morph_defaults"
-gem "wikidata-fetcher", '>=0.2.10', git: "https://github.com/everypolitician/wikidata-fetcher.git"
+gem "wikidata-fetcher", '>=0.2.11', git: "https://github.com/everypolitician/wikidata-fetcher.git"
+
+
