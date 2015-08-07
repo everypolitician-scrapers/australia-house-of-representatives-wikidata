@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/everypolitician/wikidata-fetcher.git
-  revision: 73578a4df8d2acd2cd3c47ab6b96bdaef0221bfd
+  revision: 28713aee89280221f26b27dfd9af3eeb793911cb
   specs:
-    wikidata-fetcher (0.2.12)
+    wikidata-fetcher (0.2.13)
       colorize
       diskcached
       mediawiki_api
@@ -80,4 +80,4 @@ DEPENDENCIES
   pry
   rest-client
   scraperwiki!
-  wikidata-fetcher (>= 0.2.12)!
+  wikidata-fetcher (>= 0.2.13)!

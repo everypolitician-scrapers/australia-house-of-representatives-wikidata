@@ -13,5 +13,5 @@ gem "open-uri-cached"
 gem "pry"
 gem "rest-client"
 gem "scraperwiki", git: "https://github.com/openaustralia/scraperwiki-ruby.git", branch: "morph_defaults"
-gem "wikidata-fetcher", '>=0.2.12', git: "https://github.com/everypolitician/wikidata-fetcher.git"
+gem "wikidata-fetcher", '>=0.2.13', git: "https://github.com/everypolitician/wikidata-fetcher.git"
 
