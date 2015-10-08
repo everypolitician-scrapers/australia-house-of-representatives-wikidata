@@ -16,11 +16,13 @@ end
 
 def wikinames_from(url)
   noko = noko_for(url)
-  noko.xpath('//table[.//th[contains(., "Electorate")]]//tr[td]//td[1]//a[not(@class="new")]/@title').map(&:text)
+  names = noko.xpath('//table[.//th[contains(., "Electorate")]]//tr[td]//td[1]//a[not(@class="new")]/@title').map(&:text)
+  raise "No names found in #{url}" if names.count.zero?
+  return names
 end
 
 def fetch_info(names)
-  WikiData.ids_from_pages('en', names.compact.uniq).each do |name, id|
+  WikiData.ids_from_pages('en', names.flatten.compact.uniq).each do |name, id|
     data = WikiData::Fetcher.new(id: id).data rescue nil
     unless data
       warn "No data for #{p}"
@@ -32,8 +34,8 @@ def fetch_info(names)
   end
 end
 
-names = wikinames_from('https://en.wikipedia.org/wiki/Members_of_the_Australian_House_of_Representatives,_2013%E2%80%932016')
-abort "No names" if names.count.zero?
-
-fetch_info(names)
+fetch_info(
+  wikinames_from('https://en.wikipedia.org/wiki/Members_of_the_Australian_House_of_Representatives,_2013%E2%80%932016') + 
+  wikinames_from('https://en.wikipedia.org/wiki/Members_of_the_Australian_House_of_Representatives,_2010%E2%80%932013')
+)
 
