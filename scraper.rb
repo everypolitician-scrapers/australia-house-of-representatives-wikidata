@@ -14,11 +14,26 @@ def noko_for(url)
   Nokogiri::HTML(open(url).read) 
 end
 
-noko = noko_for('https://en.wikipedia.org/wiki/Members_of_the_Australian_House_of_Representatives,_2013%E2%80%932016')
-noko.xpath('.//table[tr[contains(.,"Electorate")]]//tr[td]').each do |tr|
-  member = tr.css('td').first.css('a/@title').text
-  data = WikiData::Fetcher.new(title: member).data or next
-  # puts data
-  ScraperWiki.save_sqlite([:id], data)
+def wikinames_from(url)
+  noko = noko_for(url)
+  noko.xpath('//table[.//th[contains(., "Electorate")]]//tr[td]//td[1]//a[not(@class="new")]/@title').map(&:text)
 end
+
+def fetch_info(names)
+  WikiData.ids_from_pages('en', names.compact.uniq).each do |name, id|
+    data = WikiData::Fetcher.new(id: id).data rescue nil
+    unless data
+      warn "No data for #{p}"
+      next
+    end
+    data[:original_wikiname] = name
+    warn data
+    ScraperWiki.save_sqlite([:id], data)
+  end
+end
+
+names = wikinames_from('https://en.wikipedia.org/wiki/Members_of_the_Australian_House_of_Representatives,_2013%E2%80%932016')
+abort "No names" if names.count.zero?
+
+fetch_info(names)
 
