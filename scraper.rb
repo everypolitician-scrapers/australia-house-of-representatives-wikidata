@@ -33,8 +33,21 @@ def fetch_info(names)
   end
 end
 
+urls = [
+  'Members_of_the_Australian_House_of_Representatives,_2013–2016',
+  'Members_of_the_Australian_House_of_Representatives,_2010–2013',
+  'Members_of_the_Australian_House_of_Representatives,_2007–2010',
+  'Members_of_the_Australian_House_of_Representatives,_2004–2007',
+  'Members_of_the_Australian_House_of_Representatives,_2001–2004',
+  'Members_of_the_Australian_House_of_Representatives,_1998–2001',
+  'Members_of_the_Australian_House_of_Representatives,_1996–1998',
+  'Members_of_the_Australian_House_of_Representatives,_1993–1996',
+  'Members_of_the_Australian_House_of_Representatives,_1990–1993',
+  'Members_of_the_Australian_House_of_Representatives,_1987–1990',
+]
+
+
 fetch_info(
-  wikinames_from('https://en.wikipedia.org/wiki/Members_of_the_Australian_House_of_Representatives,_2013%E2%80%932016') + 
-  wikinames_from('https://en.wikipedia.org/wiki/Members_of_the_Australian_House_of_Representatives,_2010%E2%80%932013')
+  urls.map { |u| wikinames_from('https://en.wikipedia.org/wiki/' + URI.encode(u)) }.reduce(&:+)
 )
 
