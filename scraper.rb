@@ -29,7 +29,6 @@ def fetch_info(names)
       next
     end
     data[:original_wikiname] = name
-    warn data
     ScraperWiki.save_sqlite([:id], data)
   end
 end
