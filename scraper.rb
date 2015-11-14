@@ -51,3 +51,5 @@ fetch_info(
   urls.map { |u| wikinames_from('https://en.wikipedia.org/wiki/' + URI.encode(u)) }.reduce(&:+)
 )
 
+require 'rest-client'
+warn RestClient.post ENV['MORPH_REBUILDER_URL'], {} if ENV['MORPH_REBUILDER_URL']
