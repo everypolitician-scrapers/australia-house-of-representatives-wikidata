@@ -5,6 +5,7 @@ require 'wikidata/fetcher'
 require 'pry'
 
 urls = [
+  'Members_of_the_Australian_House_of_Representatives,_2016–2019',
   'Members_of_the_Australian_House_of_Representatives,_2013–2016',
   'Members_of_the_Australian_House_of_Representatives,_2010–2013',
   'Members_of_the_Australian_House_of_Representatives,_2007–2010',
