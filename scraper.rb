@@ -19,12 +19,10 @@ urls = [
 ]
 
 names = urls.map do |url|
-  EveryPolitician::Wikidata.wikipedia_xpath( 
+  EveryPolitician::Wikidata.wikipedia_xpath(
     url: "https://en.wikipedia.org/wiki/#{url}",
     xpath: '//table[.//th[contains(., "Electorate")]]//tr[td]//td[1]//a[not(@class="new")]/@title',
-  ) 
+  )
 end.flatten.compact.uniq
 
 EveryPolitician::Wikidata.scrape_wikidata(names: { en: names })
-warn EveryPolitician::Wikidata.notify_rebuilder
-
